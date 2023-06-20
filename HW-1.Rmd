@@ -1,0 +1,256 @@
+---
+title: "Assignment 1"
+author: "Gabriel Garcia-Ruiz, 917320019"
+date: "2023-04-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#install.packages('tidyverse')
+```
+
+## 1.
+I would say that science as a discipline or method can be generally broken down into two stages: 1. Experimentation and data gathering, and 2.  Data analysis and prediction/inference. Data science is broadly the latter stage of science, or the scientific method.
+
+If they wanted to know more about data analysis, I would say that it is the act of transforming raw data, of any type, into information that is readable. For example, in the field of business turning raw data for people's preferences into a readable chart showing those preferences. If they wanted to know more about prediction/inference, I would say it's the next stage in the process of Data Science. For example, a chart illustrating people's preferences for various products could help a store owner decide which brands to keep in stock. This is prediction, predicting which brand people will want in the future. Inference could be used to conclude whether the change in the store's stock actually helped their sales when they get their next sales report.
+
+
+
+## 2.
+i.
+I think my two biggest strengths would be knowledge of quantitative methods and optimization, taken from the list of skills in CH 1 of the notes.
+
+ii.
+I have practical and theoretical knowledge of statistical models and optimization from my Mathematics and Economics background. In particular classes I've take include: Econometrics, Optimization, Economics of Uncertainty, Applied Linear Algebra, Economic Forecasting, Game Theory, etc.
+
+iii.
+For example, in another class I took called Economic and Business Data Analytics, I learned about tree based methods of data analysis. in particular I learned how to analyze data based on groups or clustering in a scatter plot. I noticed during one of of lectures that there appeared on to be some clustering scatter plots in the data, so perhaps I could apply my knowledge there.
+
+
+
+## 3.
+i.
+I think experimental design would be what I'm least confident about, based on the same list from CH 1. Searching on the internet I found that a common example of experimental design is the design of a clinical drug trial. Typically this involved testing the effectiveness of a drug by splitting participants in an experiment into a test group and a control group, where the test group actually took the drug, and the control group took a placebo. This allowed for the researchers to see the difference in effectiveness between groups taking and not taking the drug.
+
+ii.
+The reason I feel least confident about this task is because it is the one I have the least experience with. Most of my education has dealt with the side of science where data has already been collected, designing how to get the data is mostly new to me.
+
+
+iii.
+I will try to increase my confidence in the experimental design by watching videos about it. I think a hands on visual would be best for a subject that is more hands on.
+
+
+
+## 4.
+i.
+```{r}
+# %% operator gives the remainder of the two values being divided, for integers to be divisible, their remainder must be 0
+if(81%%3==0){
+         print('true')
+} else {print('false')}
+if(170%%3==0){
+         print('true')
+} else {print('false')}
+if(1923%%3==0){
+         print('true')
+} else {print('false')}
+if(3825%%3==0){
+         print('true')
+} else {print('false')}
+
+if(81%%9==0){
+         print('true')
+} else {print('false')}
+if(170%%9==0){
+         print('true')
+} else {print('false')}
+if(1923%%9==0){
+         print('true')
+} else {print('false')}
+if(3825%%9==0){
+         print('true')
+} else {print('false')}
+```
+ii.
+```{r}
+w <- 8 + 1
+x <- 1 + 7 + 0
+y <- 1 + 9 + 2 + 3
+z <- 3 + 8 + 2 + 5
+
+# cat() to display multiple variables
+cat(w, x, y, z)
+```
+iii.
+```{r}
+if(w%%3==0){
+         print('true')
+} else {print('false')}
+if(x%%3==0){
+         print('true')
+} else {print('false')}
+if(y%%3==0){
+         print('true')
+} else {print('false')}
+if(z%%3==0){
+         print('true')
+} else {print('false')}
+
+if(w%%9==0){
+         print('true')
+} else {print('false')}
+if(x%%9==0){
+         print('true')
+} else {print('false')}
+if(y%%9==0){
+         print('true')
+} else {print('false')}
+if(z%%9==0){
+         print('true')
+} else {print('false')}
+```
+
+iiii.
+My observation of these results is that if an integer n is divisible by some integer k, then the sum of each value in n, is also divisible by k.
+
+
+
+## 5.
+i.
+Here we can see that the product is the result of vector a divided vector b, multiplied by vector a divided by vector c, all multiplied by 2.
+According to R documentation we can use the prod() function on numeric or complex or logical vectors, we have numeric vectors in this case.
+Hence, to program the product we have:
+
+```{r}
+a <- c(2, 4, 6)
+b <- c(1, 3, 5)
+c <- c(3, 5, 7)
+
+result1 <- 2 * prod((a/b) * (b/c))
+result1
+```
+
+ii.
+This product is an extension of the product in i. where we carry on the computation until we reach a value of 1000 in the final numerators and values 999/1001 in the denominators. To do this computation more efficiently we can use a for loop:
+
+```{r}
+# must initialize variable first
+result2 <- 2
+  
+# iterate from 2 to , increment by 2
+for (i in seq(2, 1000, by = 2)) {
+  # e.g. for i = 2: (2/1) * (2/3), as required
+  product <- (i / (i - 1)) * (i / (i + 1))
+    
+  result2 <- result2 * product
+}
+result2
+```
+
+## 6
+
+```{r}
+product_fcn <- function(n) {
+  
+  # initialize variable
+  result3 <- 2
+  
+  # iterate from 2 to 2n, increment by 2
+  for (i in seq(2, 2*n, by = 2)) {
+    product <- (i / (i - 1)) * (i / (i + 1))
+    
+    result3 <- result3 * product
+  }
+  
+  # return the final product
+  return(result3)
+}
+
+product_fcn(1791216)
+```
+
+
+
+## 7
+```{r}
+# create sequence defining the given values of n
+n_val <- seq(5, 500, by = 5)
+
+# must initialize vector to store values
+products <- numeric(length(n_val))
+
+# use seq_along() to pass through the values of n for each iteration
+for (i in seq_along(n_val)) {
+  products[i] <- product_fcn(n_val[i])
+}
+
+# plot the value of each iteration
+plot(products)
+```
+My finding is primarily that this sequence of values is converging to the value of pi. The same value that was the result of product_fcn() in 6.
+
+
+
+## 8
+
+```{r setup2, include=FALSE}
+data(cars)
+View(cars)
+```
+
+```{r}
+# head() displays the first 5 observations normally, but here we use the option n = 6 to display 6 instead
+head(cars, n = 6)
+
+# the number of observations in a data set is equal to the number of rows, we can count the number of rows using nrow()
+obs <- nrow(cars)
+obs
+
+# the number of variables is equal to the number of columns, we can this value similarly using ncol()
+vars <- ncol(cars)
+vars
+```
+
+The number of observations and variables can viewed elsewhere in R Studio, such as the global environment where the data set 'cars' is listed.
+
+
+
+## 9
+As stated before, each column in a data set represents the variables. In the case of the cars data set, the variables are 'speed' and 'dist' for speed and distance. Each value in a column represents one observation of the variable in the given column.
+
+
+
+## 10
+Again each row represents one observation in a data set. For example, by looking at row 1 in the output of the head() function, we can see the first observation has speed: 4, dist: 2. Those are variable values observed for observation 1.
+
+
+
+# 11
+```{r}
+# only 2 variables in cars, no need to specify which variables to plot
+plot(cars)
+```
+
+Based on the scatter plot, there appears to be a somewhat linear, positive relationship between speed and distance.
+
+
+
+## Acknowledgments
+Class Notes: 
+CH 1, Appendix B, Appendix C.
+
+R documentation:
+prod() function - https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/prod
+
+ChatGPT:
+Using seq_along() in a for loop was something I got as a response from a question, but I didn't keep the chat log for the exact question/response.
+
+Other:
+https://www.w3schools.com/r/r_for_loop.asp
+https://www.dataquest.io/blog/write-functions-in-r/
+
+# Session Information
+```{r}
+sessionInfo()
+```
+
